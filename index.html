@@ -8,61 +8,102 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
-    <div class="container nav-wrap">
-      <a class="brand" href="#home" aria-label="PeerNet Solutions home">
-        <span class="brand-mark">PN</span>
-        <span>PeerNet Solutions</span>
-      </a>
-      <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
-      <nav class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#topics">Topics</a>
-        <a href="#videos">Videos</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
+  <div class="container nav-wrap">
+    <a class="brand" href="#home" aria-label="PeerNet Solutions home">
+      <img
+        src="images/PeerNet Solutions.png"
+        alt="PeerNet Solutions"
+        class="brand-logo"
+      >
+    </a>
+
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#home">Home</a>
+      <a href="#topics">Topics</a>
+      <a href="#videos">Videos</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+        <button
+      id="themeToggle"
+      class="theme-toggle"
+      type="button"
+      aria-label="Toggle dark and light theme"
+    >
+      🌙
+    </button>
+  </div>
+</header>
 
   <main>
-    <section id="home" class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <span class="eyebrow">Networking • Automation • AI</span>
-          <h1>Learn networking.<br><span>Build automation.</span></h1>
-          <p>
-            PeerNet Solutions helps network engineers and students understand Cisco networking,
-            SD-WAN, Python automation, PyATS, security, APIs and interview concepts through practical lessons.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#videos">Explore Videos</a>
-            <a class="btn btn-secondary" href="#contact">Join the Community</a>
-          </div>
-          <div class="hero-stats">
-            <div><strong>10+</strong><span>Core Topics</span></div>
-            <div><strong>Hands-on</strong><span>Learning Style</span></div>
-            <div><strong>Real-world</strong><span>Interview Focus</span></div>
-          </div>
+<section id="home" class="hero">
+  <div class="container hero-grid">
+
+    <div class="hero-copy">
+      <span class="eyebrow">
+        Networking • Automation • AI
+      </span>
+
+      <h1>
+        Empowering the Future of<br>
+        <span>Networking & Automation</span>
+      </h1>
+
+      <p>
+        Learn Cisco Networking, SD-WAN, Python Automation, PyATS,
+        Network Security, AI and interview preparation through practical,
+        real-world learning with PeerNet Solutions.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#videos">Explore Videos</a>
+        <a class="btn btn-secondary" href="#contact">Join the Community</a>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <strong>10+</strong>
+          <span>Core Topics</span>
         </div>
-        <div class="hero-visual" aria-label="Network topology illustration">
-          <div class="network-card">
-            <div class="node core">CORE</div>
-            <div class="node left-top">R1</div>
-            <div class="node right-top">R2</div>
-            <div class="node left-bottom">SW1</div>
-            <div class="node right-bottom">SW2</div>
-            <span class="line l1"></span><span class="line l2"></span>
-            <span class="line l3"></span><span class="line l4"></span>
-            <span class="line l5"></span>
-            <div class="pulse p1"></div><div class="pulse p2"></div>
-          </div>
+
+        <div>
+          <strong>Hands-on</strong>
+          <span>Learning Style</span>
+        </div>
+
+        <div>
+          <strong>Real-world</strong>
+          <span>Interview Focus</span>
         </div>
       </div>
-    </section>
+    </div>
+
+    <div class="hero-visual" aria-label="Network topology illustration">
+      <div class="network-card">
+        <div class="node core">CORE</div>
+        <div class="node left-top">R1</div>
+        <div class="node right-top">R2</div>
+        <div class="node left-bottom">SW1</div>
+        <div class="node right-bottom">SW2</div>
+
+        <span class="line l1"></span>
+        <span class="line l2"></span>
+        <span class="line l3"></span>
+        <span class="line l4"></span>
+        <span class="line l5"></span>
+
+        <div class="pulse p1"></div>
+        <div class="pulse p2"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
     <section id="topics" class="section">
       <div class="container">
@@ -72,12 +113,45 @@
           <p>Clear explanations, labs, scripts and troubleshooting examples for modern network engineers.</p>
         </div>
         <div class="cards-grid">
-          <article class="topic-card"><span>01</span><h3>Cisco Networking</h3><p>STP, VLANs, OSPF, BGP, MPLS, VRF, QoS and troubleshooting.</p></article>
-          <article class="topic-card"><span>02</span><h3>SD-WAN</h3><p>Controllers, TLOCs, segmentation, policies, cloud deployments and operations.</p></article>
-          <article class="topic-card"><span>03</span><h3>Python Automation</h3><p>CLI parsing, REST APIs, reusable scripts, test validation and reporting.</p></article>
-          <article class="topic-card"><span>04</span><h3>PyATS & Testing</h3><p>AEtest, testbeds, regression suites, failure analysis and automation design.</p></article>
-          <article class="topic-card"><span>05</span><h3>Security</h3><p>IDS, IPS, VPN, firewalls, TLS, packet inspection and security testing.</p></article>
-          <article class="topic-card"><span>06</span><h3>AI for Networking</h3><p>Prompt design, coding assistants, test generation and network simulators.</p></article>
+          <a href="topics/cisco-networking.html" class="topic-card">
+            <span>01</span>
+            <h3>Cisco Networking</h3>
+            <p>STP, VLANs, OSPF, BGP, MPLS, VRF, QoS and troubleshooting.</p>
+            <strong>Start Learning →</strong>
+          </a>
+          <a href="topics/sdwan.html" class="topic-card">
+            <span>02</span>
+            <h3>SD-WAN</h3>
+            <p>Controllers, TLOCs, segmentation, policies and cloud deployments.</p>
+            <strong>Start Learning →</strong>
+          </a>
+
+          <a href="topics/python-automation.html" class="topic-card">
+            <span>03</span>
+            <h3>Python Automation</h3>
+            <p>REST APIs, CLI parsing, reusable scripts and validation.</p>
+            <strong>Start Learning →</strong>
+          </a>
+          <a href="topics/pyats-testing.html" class="topic-card">
+            <span>04</span>
+            <h3>PyATS & Testing</h3>
+            <p>AEtest, testbeds, regression testing and reporting.</p>
+            <strong>Start Learning →</strong>
+          </a>
+
+          <a href="topics/network-security.html" class="topic-card">
+            <span>05</span>
+            <h3>Network Security</h3>
+            <p>Firewalls, IDS, IPS, VPN, TLS and security testing.</p>
+            <strong>Start Learning →</strong>
+          </a>
+
+          <a href="topics/ai-networking.html" class="topic-card">
+            <span>06</span>
+            <h3>AI for Networking</h3>
+            <p>Prompt engineering, AI scripts, troubleshooting and test generation.</p>
+            <strong>Start Learning →</strong>
+          </a>
         </div>
       </div>
     </section>

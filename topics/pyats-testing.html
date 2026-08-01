@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="PyATS & Network Testing learning content from PeerNet Solutions.">
+  <title>PyATS & Network Testing | PeerNet Solutions</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+
+      <a class="brand" href="../index.html" aria-label="PeerNet Solutions home">
+        <img
+          src="../images/PeerNet Solutions.png"
+          alt="PeerNet Solutions"
+          class="brand-logo"
+        >
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#topics">Topics</a>
+        <a href="../index.html#videos">Videos</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+
+      <button
+        id="themeToggle"
+        class="theme-toggle"
+        type="button"
+        aria-label="Toggle dark and light theme"
+      >
+        🌙
+      </button>
+
+    </div>
+  </header>
+
+  <main class="lesson-page">
+
+    <section class="lesson-hero">
+      <div class="container">
+        <span class="eyebrow">Learning Track 04</span>
+        <h1>PyATS & Network Testing</h1>
+        <p>Learn pyATS AEtest, testbed files, setup and cleanup, test sections, parsing, regression testing and result reporting.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container lesson-layout">
+
+        <aside class="lesson-menu">
+          <h3>Contents</h3>
+          <a href="#overview">What is pyATS?</a>
+          <a href="#testbed">Testbed YAML</a>
+          <a href="#aetest">AEtest Structure</a>
+          <a href="#steps">Test Steps</a>
+          <a href="#parsing">Genie Parsing</a>
+          <a href="#regression">Regression Testing</a>
+          <a href="#best-practices">Best Practices</a>
+        </aside>
+
+        <article class="lesson-content">
+          <section id="overview">
+            <h2>What is pyATS?</h2>
+            <p>
+            pyATS is a Python-based test automation framework commonly used for network
+            validation. Genie provides parsers, models and reusable network testing
+            capabilities.
+            </p>
+            <ul>
+              <li>Structured setup, test and cleanup sections.</li>
+              <li>Device connectivity through testbed definitions.</li>
+              <li>Detailed logs and test result reporting.</li>
+              <li>Reusable parsers and network data models.</li>
+            </ul>
+          </section>
+
+          <section id="testbed">
+            <h2>Testbed YAML</h2>
+            <p>A testbed file stores device connection information separately from test logic.</p>
+            <pre><code>testbed:
+              name: peernet-lab
+
+            devices:
+              R1:
+                os: iosxe
+                type: router
+                connections:
+                  cli:
+                    protocol: ssh
+                    ip: 192.0.2.10
+                credentials:
+                  default:
+                    username: admin
+                    password: password</code></pre>
+          </section>
+
+          <section id="aetest">
+            <h2>AEtest Structure</h2>
+            <pre><code>from pyats import aetest
+
+            class CommonSetup(aetest.CommonSetup):
+
+                @aetest.subsection
+                def connect(self, testbed):
+                    testbed.connect()
+
+
+            class InterfaceValidation(aetest.Testcase):
+
+                @aetest.test
+                def verify_interfaces(self, testbed):
+                    output = testbed.devices["R1"].parse(
+                        "show ip interface brief"
+                    )
+                    self.passed("Interface output collected")
+
+
+            class CommonCleanup(aetest.CommonCleanup):
+
+                @aetest.subsection
+                def disconnect(self, testbed):
+                    testbed.disconnect()</code></pre>
+          </section>
+
+          <section id="steps">
+            <h2>Using Test Steps</h2>
+            <p>Steps divide a testcase into clear actions and make failures easier to identify.</p>
+            <pre><code>@aetest.test
+            def validate_routing(self, steps, device):
+                with steps.start("Collect routing table"):
+                    routes = device.parse("show ip route")
+
+                with steps.start("Validate default route"):
+                    if "0.0.0.0/0" not in str(routes):
+                        self.failed("Default route is missing")</code></pre>
+          </section>
+
+          <section id="parsing">
+            <h2>Genie Parsing</h2>
+            <p>Genie parsers convert CLI output into structured dictionaries.</p>
+            <pre><code>interfaces = device.parse("show interfaces")
+
+            for name, details in interfaces.items():
+                operational = details.get("oper_status")
+                print(name, operational)</code></pre>
+          </section>
+
+          <section id="regression">
+            <h2>Regression Testing</h2>
+            <ol>
+              <li>Prepare a stable baseline build.</li>
+              <li>Execute the same suite against the new build.</li>
+              <li>Compare pass, fail, blocked and skipped results.</li>
+              <li>Investigate new failures and environmental issues.</li>
+              <li>File defects with logs, topology and reproduction steps.</li>
+            </ol>
+          </section>
+
+          <section id="best-practices">
+            <h2>Best Practices</h2>
+            <ul>
+              <li>Keep test data separate from test logic.</li>
+              <li>Use CommonSetup for discovery and connectivity.</li>
+              <li>Use CommonCleanup to restore changed state.</li>
+              <li>Write independent and repeatable testcases.</li>
+              <li>Validate actual device output rather than hard-coded success.</li>
+              <li>Record meaningful logs for failure analysis.</li>
+            </ul>
+          </section>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <p>© <span id="year"></span> PeerNet Solutions. All rights reserved.</p>
+      <a href="../index.html">Back to Home</a>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

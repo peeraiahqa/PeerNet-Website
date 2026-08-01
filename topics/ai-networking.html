@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="AI for Networking learning content from PeerNet Solutions.">
+  <title>AI for Networking | PeerNet Solutions</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+
+      <a class="brand" href="../index.html" aria-label="PeerNet Solutions home">
+        <img
+          src="../images/PeerNet Solutions.png"
+          alt="PeerNet Solutions"
+          class="brand-logo"
+        >
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#topics">Topics</a>
+        <a href="../index.html#videos">Videos</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+
+      <button
+        id="themeToggle"
+        class="theme-toggle"
+        type="button"
+        aria-label="Toggle dark and light theme"
+      >
+        🌙
+      </button>
+
+    </div>
+  </header>
+
+  <main class="lesson-page">
+
+    <section class="lesson-hero">
+      <div class="container">
+        <span class="eyebrow">Learning Track 06</span>
+        <h1>AI for Networking</h1>
+        <p>Learn how AI can assist network engineers with prompting, code generation, test design, documentation, troubleshooting and RAG.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container lesson-layout">
+
+        <aside class="lesson-menu">
+          <h3>Contents</h3>
+          <a href="#overview">AI in Networking</a>
+          <a href="#prompting">Prompt Engineering</a>
+          <a href="#code-generation">Code Generation</a>
+          <a href="#test-design">Test Design</a>
+          <a href="#troubleshooting">Troubleshooting</a>
+          <a href="#rag">RAG</a>
+          <a href="#responsible-use">Responsible Use</a>
+        </aside>
+
+        <article class="lesson-content">
+          <section id="overview">
+            <h2>AI in Networking</h2>
+            <p>
+            AI can accelerate repetitive engineering tasks, but network engineers must
+            validate every generated command, script and conclusion before using it in a
+            real environment.
+            </p>
+            <ul>
+              <li>Generate draft automation scripts.</li>
+              <li>Explain protocols and logs.</li>
+              <li>Create test scenarios from requirements.</li>
+              <li>Summarize incidents and troubleshooting notes.</li>
+              <li>Search internal technical documents using RAG.</li>
+            </ul>
+          </section>
+
+          <section id="prompting">
+            <h2>Prompt Engineering</h2>
+            <p>A strong prompt clearly defines the role, goal, input, constraints and expected output.</p>
+            <pre><code>Act as a senior network automation engineer.
+
+            Goal:
+            Validate that every WAN edge has active control connections.
+
+            Input:
+            A pyATS testbed and CLI output from show control connections.
+
+            Constraints:
+            - Do not hard-code device names.
+            - Report failed devices clearly.
+            - Do not change device configuration.
+
+            Output:
+            Provide executable Python code and a brief explanation.</code></pre>
+          </section>
+
+          <section id="code-generation">
+            <h2>AI-Assisted Code Generation</h2>
+            <p>Use AI to create a first draft, then review it for correctness, security and scalability.</p>
+            <ol>
+              <li>Describe the topology and expected behavior.</li>
+              <li>Provide realistic sample input.</li>
+              <li>Define error-handling expectations.</li>
+              <li>Ask for modular code.</li>
+              <li>Test generated code in a lab before production use.</li>
+            </ol>
+          </section>
+
+          <section id="test-design">
+            <h2>Requirement-to-Test Design</h2>
+            <p>AI can convert a PRD into a structured test plan when the requirements are explicit.</p>
+            <ul>
+              <li>Map every requirement to one or more testcases.</li>
+              <li>Include positive, negative and resiliency scenarios.</li>
+              <li>Define preconditions, steps and expected results.</li>
+              <li>Identify automation candidates.</li>
+              <li>Review for missing coverage and unsupported assumptions.</li>
+            </ul>
+          </section>
+
+          <section id="troubleshooting">
+            <h2>AI-Assisted Troubleshooting</h2>
+            <p>Provide symptoms, scope, recent changes, topology and evidence instead of asking a vague question.</p>
+            <pre><code>Symptom:
+            Branch router cannot establish a control connection to vSmart.
+
+            Evidence:
+            - Underlay ping succeeds.
+            - vBond connection is active.
+            - Certificate is valid.
+            - show control connections shows no vSmart peer.
+
+            Task:
+            Give a prioritized troubleshooting flow with verification commands.
+            Do not recommend configuration changes until checks are completed.</code></pre>
+          </section>
+
+          <section id="rag">
+            <h2>Retrieval-Augmented Generation</h2>
+            <p>
+            RAG allows an AI application to retrieve relevant content from your documents
+            before generating an answer.
+            </p>
+            <ol>
+              <li>Extract text from documents.</li>
+              <li>Split text into smaller chunks.</li>
+              <li>Create embeddings.</li>
+              <li>Store embeddings in a vector database.</li>
+              <li>Retrieve relevant chunks for each question.</li>
+              <li>Ask the LLM to answer only from retrieved evidence.</li>
+            </ol>
+          </section>
+
+          <section id="responsible-use">
+            <h2>Responsible AI Use</h2>
+            <ul>
+              <li>Never expose passwords, API keys or confidential data.</li>
+              <li>Do not execute unknown commands directly on production devices.</li>
+              <li>Validate generated code with tests and code review.</li>
+              <li>Clearly separate sample output from real evidence.</li>
+              <li>Keep human approval for high-impact configuration changes.</li>
+            </ul>
+          </section>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <p>© <span id="year"></span> PeerNet Solutions. All rights reserved.</p>
+      <a href="../index.html">Back to Home</a>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

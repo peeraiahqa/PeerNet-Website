@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Cisco SD-WAN learning content from PeerNet Solutions.">
+  <title>Cisco SD-WAN | PeerNet Solutions</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+
+      <a class="brand" href="../index.html" aria-label="PeerNet Solutions home">
+        <img
+          src="../images/PeerNet Solutions.png"
+          alt="PeerNet Solutions"
+          class="brand-logo"
+        >
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#topics">Topics</a>
+        <a href="../index.html#videos">Videos</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+
+      <button
+        id="themeToggle"
+        class="theme-toggle"
+        type="button"
+        aria-label="Toggle dark and light theme"
+      >
+        🌙
+      </button>
+
+    </div>
+  </header>
+
+  <main class="lesson-page">
+
+    <section class="lesson-hero">
+      <div class="container">
+        <span class="eyebrow">Learning Track 02</span>
+        <h1>Cisco SD-WAN</h1>
+        <p>Learn Cisco SD-WAN architecture, controllers, control connections, routing, segmentation, policies, cloud deployment and troubleshooting.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container lesson-layout">
+
+        <aside class="lesson-menu">
+          <h3>Contents</h3>
+          <a href="#overview">What is SD-WAN?</a>
+          <a href="#controllers">Controllers</a>
+          <a href="#control-connections">Control Connections</a>
+          <a href="#tloc-omp">TLOC and OMP</a>
+          <a href="#segmentation">Segmentation</a>
+          <a href="#policies">Policies</a>
+          <a href="#troubleshooting">Troubleshooting</a>
+        </aside>
+
+        <article class="lesson-content">
+          <section id="overview">
+            <h2>What is SD-WAN?</h2>
+            <p>
+            Cisco SD-WAN is a software-defined WAN solution that separates control-plane
+            decisions from packet forwarding. It provides centralized management, secure
+            overlay tunnels, application-aware routing, segmentation and policy control.
+            </p>
+            <ul>
+              <li>Centralized management through vManage.</li>
+              <li>Secure control-plane orchestration through vBond and vSmart.</li>
+              <li>Encrypted data-plane tunnels between WAN edge devices.</li>
+              <li>Application-aware path selection using loss, latency and jitter.</li>
+            </ul>
+          </section>
+
+          <section id="controllers">
+            <h2>Cisco SD-WAN Controllers</h2>
+            <h3>vManage</h3>
+            <p>Provides centralized configuration, monitoring, alarms, dashboards, APIs and software lifecycle management.</p>
+            <h3>vBond</h3>
+            <p>Authenticates devices, performs orchestration and helps WAN edge devices discover the required controllers.</p>
+            <h3>vSmart</h3>
+            <p>Acts as the centralized control-plane controller and exchanges routes, TLOCs, policies and security information using OMP.</p>
+            <h3>WAN Edge</h3>
+            <p>Forwards user traffic, forms secure tunnels and applies centralized or localized policies.</p>
+          </section>
+
+          <section id="control-connections">
+            <h2>Control Connections</h2>
+            <p>
+            Cisco SD-WAN devices use secure DTLS or TLS control connections. A WAN edge
+            normally connects first to vBond, then establishes permanent control
+            connections to vSmart and vManage.
+            </p>
+            <pre><code>show control connections
+            show control local-properties
+            show control connections-history
+            show orchestrator connections</code></pre>
+          </section>
+
+          <section id="tloc-omp">
+            <h2>TLOC and OMP</h2>
+            <p>
+            A TLOC identifies a WAN transport endpoint using system IP, transport color and
+            encapsulation. OMP distributes routes, TLOCs, services and policy information
+            between WAN edge devices through vSmart.
+            </p>
+            <pre><code>show omp peers
+            show omp routes
+            show omp tlocs
+            show bfd sessions</code></pre>
+          </section>
+
+          <section id="segmentation">
+            <h2>Segmentation</h2>
+            <p>
+            Cisco SD-WAN uses VPNs to separate traffic. VPN 0 is the transport VPN, VPN 512
+            is the management VPN, and service VPNs carry user traffic.
+            </p>
+            <ul>
+              <li>VPN 0: underlay transport connectivity.</li>
+              <li>VPN 512: out-of-band management.</li>
+              <li>Service VPNs: enterprise applications and user segments.</li>
+            </ul>
+            <pre><code>show vpn
+            show ip route vpn 10
+            show running-config vpn</code></pre>
+          </section>
+
+          <section id="policies">
+            <h2>Centralized and Localized Policies</h2>
+            <p>
+            Centralized policies are configured in vManage and enforced through vSmart.
+            Localized policies are applied directly on WAN edge devices.
+            </p>
+            <ul>
+              <li>Control policy: influences OMP route exchange.</li>
+              <li>Data policy: controls traffic forwarding and service chaining.</li>
+              <li>Application-aware routing policy: selects paths using SLA metrics.</li>
+              <li>Localized policy: applies ACL, QoS and route policy locally.</li>
+            </ul>
+          </section>
+
+          <section id="troubleshooting">
+            <h2>SD-WAN Troubleshooting</h2>
+            <ol>
+              <li>Verify underlay reachability and default routes.</li>
+              <li>Check system IP, organization name and certificates.</li>
+              <li>Validate vBond, vSmart and vManage control connections.</li>
+              <li>Check OMP peers, routes and TLOC advertisements.</li>
+              <li>Verify BFD sessions and tunnel health.</li>
+              <li>Review policy, NAT, firewall and transport-port behavior.</li>
+            </ol>
+            <pre><code>show control connections
+            show omp peers
+            show omp routes
+            show bfd sessions
+            show app-route stats
+            show logging</code></pre>
+          </section>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <p>© <span id="year"></span> PeerNet Solutions. All rights reserved.</p>
+      <a href="../index.html">Back to Home</a>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

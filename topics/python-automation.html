@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Python Automation learning content from PeerNet Solutions.">
+  <title>Python Automation | PeerNet Solutions</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+
+      <a class="brand" href="../index.html" aria-label="PeerNet Solutions home">
+        <img
+          src="../images/PeerNet Solutions.png"
+          alt="PeerNet Solutions"
+          class="brand-logo"
+        >
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#topics">Topics</a>
+        <a href="../index.html#videos">Videos</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+
+      <button
+        id="themeToggle"
+        class="theme-toggle"
+        type="button"
+        aria-label="Toggle dark and light theme"
+      >
+        🌙
+      </button>
+
+    </div>
+  </header>
+
+  <main class="lesson-page">
+
+    <section class="lesson-hero">
+      <div class="container">
+        <span class="eyebrow">Learning Track 03</span>
+        <h1>Python Automation</h1>
+        <p>Learn Python fundamentals, REST APIs, SSH automation, regex, parsing, validation and reusable network automation design.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container lesson-layout">
+
+        <aside class="lesson-menu">
+          <h3>Contents</h3>
+          <a href="#basics">Python Basics</a>
+          <a href="#functions">Functions</a>
+          <a href="#collections">Lists and Dictionaries</a>
+          <a href="#regex">Regular Expressions</a>
+          <a href="#rest-api">REST APIs</a>
+          <a href="#ssh">SSH Automation</a>
+          <a href="#validation">Validation</a>
+        </aside>
+
+        <article class="lesson-content">
+          <section id="basics">
+            <h2>Python Basics</h2>
+            <p>Python is widely used in network automation because it is readable, portable and supported by many networking libraries.</p>
+            <pre><code>device_name = "R1"
+            management_ip = "192.0.2.10"
+            is_online = True
+
+            print(f"{device_name}: {management_ip}, online={is_online}")</code></pre>
+          </section>
+
+          <section id="functions">
+            <h2>Functions</h2>
+            <p>Functions make automation code reusable and easier to test.</p>
+            <pre><code>def is_interface_up(status: str) -> bool:
+                return status.strip().lower() == "up"
+
+            print(is_interface_up("up"))</code></pre>
+          </section>
+
+          <section id="collections">
+            <h2>Lists and Dictionaries</h2>
+            <p>Lists store ordered values, while dictionaries store key-value information.</p>
+            <pre><code>devices = ["R1", "R2", "SW1"]
+
+            interfaces = {
+                "Gi0/0": "up",
+                "Gi0/1": "down",
+            }
+
+            for interface, status in interfaces.items():
+                print(interface, status)</code></pre>
+          </section>
+
+          <section id="regex">
+            <h2>Regular Expressions</h2>
+            <p>Regular expressions are useful for extracting structured values from CLI output.</p>
+            <pre><code>import re
+
+            output = "Device ID: R1, IP: 192.0.2.10"
+            match = re.search(r"IP:\s+(\d+\.\d+\.\d+\.\d+)", output)
+
+            if match:
+                print(match.group(1))</code></pre>
+          </section>
+
+          <section id="rest-api">
+            <h2>REST API Automation</h2>
+            <p>REST APIs allow scripts to retrieve or modify controller and device data using HTTP methods.</p>
+            <pre><code>import requests
+
+            url = "https://api.example.com/devices"
+            headers = {"Authorization": "Bearer TOKEN"}
+
+            response = requests.get(url, headers=headers, timeout=30)
+            response.raise_for_status()
+
+            devices = response.json()
+            print(devices)</code></pre>
+          </section>
+
+          <section id="ssh">
+            <h2>SSH Automation</h2>
+            <p>SSH automation can execute show commands on devices that do not provide a suitable API.</p>
+            <pre><code>from netmiko import ConnectHandler
+
+            device = {
+                "device_type": "cisco_ios",
+                "host": "192.0.2.10",
+                "username": "admin",
+                "password": "password",
+            }
+
+            connection = ConnectHandler(**device)
+            output = connection.send_command("show ip interface brief")
+            connection.disconnect()
+
+            print(output)</code></pre>
+          </section>
+
+          <section id="validation">
+            <h2>Validation and Error Handling</h2>
+            <p>Automation should validate real output and report clear failures instead of assuming success.</p>
+            <pre><code>def validate_interfaces(interfaces: dict[str, str]) -> list[str]:
+                failed = []
+
+                for name, status in interfaces.items():
+                    if status.lower() != "up":
+                        failed.append(name)
+
+                return failed
+
+            failed_interfaces = validate_interfaces({
+                "Gi0/0": "up",
+                "Gi0/1": "down",
+            })
+
+            print("Failed:", failed_interfaces)</code></pre>
+          </section>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <p>© <span id="year"></span> PeerNet Solutions. All rights reserved.</p>
+      <a href="../index.html">Back to Home</a>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

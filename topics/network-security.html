@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Network Security learning content from PeerNet Solutions.">
+  <title>Network Security | PeerNet Solutions</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+
+      <a class="brand" href="../index.html" aria-label="PeerNet Solutions home">
+        <img
+          src="../images/PeerNet Solutions.png"
+          alt="PeerNet Solutions"
+          class="brand-logo"
+        >
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#topics">Topics</a>
+        <a href="../index.html#videos">Videos</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+
+      <button
+        id="themeToggle"
+        class="theme-toggle"
+        type="button"
+        aria-label="Toggle dark and light theme"
+      >
+        🌙
+      </button>
+
+    </div>
+  </header>
+
+  <main class="lesson-page">
+
+    <section class="lesson-hero">
+      <div class="container">
+        <span class="eyebrow">Learning Track 05</span>
+        <h1>Network Security</h1>
+        <p>Learn firewalls, ACLs, IDS, IPS, VPNs, TLS, packet inspection, secure design and practical troubleshooting.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container lesson-layout">
+
+        <aside class="lesson-menu">
+          <h3>Contents</h3>
+          <a href="#fundamentals">Security Fundamentals</a>
+          <a href="#firewalls">Firewalls and ACLs</a>
+          <a href="#ids-ips">IDS and IPS</a>
+          <a href="#vpn">VPN and IPsec</a>
+          <a href="#tls">TLS and HTTPS</a>
+          <a href="#snort">Snort</a>
+          <a href="#troubleshooting">Troubleshooting</a>
+        </aside>
+
+        <article class="lesson-content">
+          <section id="fundamentals">
+            <h2>Security Fundamentals</h2>
+            <p>
+            Network security protects confidentiality, integrity and availability while
+            controlling who can access systems and data.
+            </p>
+            <ul>
+              <li>Confidentiality: prevent unauthorized disclosure.</li>
+              <li>Integrity: prevent unauthorized modification.</li>
+              <li>Availability: keep services reachable and reliable.</li>
+              <li>Authentication: verify identity.</li>
+              <li>Authorization: define permitted actions.</li>
+            </ul>
+          </section>
+
+          <section id="firewalls">
+            <h2>Firewalls and ACLs</h2>
+            <p>Firewalls enforce traffic policy, while ACLs permit or deny traffic based on defined conditions.</p>
+            <pre><code>ip access-list extended WEB-ACCESS
+             permit tcp 10.10.10.0 0.0.0.255 host 192.0.2.20 eq 443
+             deny ip any any log
+
+            interface GigabitEthernet0/0
+             ip access-group WEB-ACCESS in</code></pre>
+          </section>
+
+          <section id="ids-ips">
+            <h2>IDS and IPS</h2>
+            <p>
+            An IDS detects suspicious activity and generates alerts. An IPS sits inline and
+            can block or modify malicious traffic.
+            </p>
+            <ul>
+              <li>IDS: passive detection and alerting.</li>
+              <li>IPS: inline prevention and blocking.</li>
+              <li>Signature-based detection: matches known attack patterns.</li>
+              <li>Anomaly-based detection: identifies unusual behavior.</li>
+            </ul>
+          </section>
+
+          <section id="vpn">
+            <h2>VPN and IPsec</h2>
+            <p>IPsec protects traffic using encryption, authentication and integrity checks.</p>
+            <ul>
+              <li>IKE negotiates security parameters and keys.</li>
+              <li>ESP provides encryption and integrity.</li>
+              <li>Site-to-site VPN connects networks.</li>
+              <li>Remote-access VPN connects individual users.</li>
+            </ul>
+            <pre><code>show crypto ikev2 sa
+            show crypto ipsec sa
+            show crypto session</code></pre>
+          </section>
+
+          <section id="tls">
+            <h2>TLS and HTTPS</h2>
+            <p>
+            HTTPS uses TLS to protect HTTP traffic. TLS validates server identity using
+            certificates and creates encrypted session keys.
+            </p>
+            <ol>
+              <li>Client initiates a TLS handshake.</li>
+              <li>Server presents its certificate.</li>
+              <li>Client validates the certificate chain.</li>
+              <li>Both sides derive session keys.</li>
+              <li>Application data is encrypted.</li>
+            </ol>
+          </section>
+
+          <section id="snort">
+            <h2>Snort</h2>
+            <p>Snort is an open-source IDS/IPS that inspects packets and applies detection rules.</p>
+            <pre><code>alert tcp any any -> 192.0.2.20 80 (
+              msg:"Possible web scan";
+              flags:S;
+              threshold:type both, track by_src, count 20, seconds 10;
+              sid:1000001;
+              rev:1;
+            )</code></pre>
+          </section>
+
+          <section id="troubleshooting">
+            <h2>Security Troubleshooting</h2>
+            <ol>
+              <li>Identify the source, destination, protocol and port.</li>
+              <li>Check routing before checking policy.</li>
+              <li>Validate firewall zones and rule order.</li>
+              <li>Review NAT translations and session tables.</li>
+              <li>Check certificate validity and time synchronization.</li>
+              <li>Use packet captures to confirm where traffic is dropped.</li>
+            </ol>
+          </section>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <p>© <span id="year"></span> PeerNet Solutions. All rights reserved.</p>
+      <a href="../index.html">Back to Home</a>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
